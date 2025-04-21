@@ -1,0 +1,20 @@
+{
+  "name": "codecla-cli - interactive",
+  "version": "0.0.2",
+  "main": "index_interactive.js",
+
+  "dependencies": {
+    "@inquirer/prompts": "^7.4.1",
+    "commander": "^13.1.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node output/index_interactive.js",
+    "dev": "npm run build && npm run start"
+  }
+}
