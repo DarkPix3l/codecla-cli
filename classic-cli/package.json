@@ -1,0 +1,22 @@
+{
+  "name": "codecla-cli_classic",
+  "version": "0.0.1",
+  "main": "index_classic.js",
+  "dependencies": {
+    "@inquirer/prompts": "^7.4.1",
+    "commander": "^13.1.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node ./output/index_classic.js",
+    "dev": "ts-node index_classic.ts"
+  },
+  "bin": {
+  "cligen": "./output/index_classic.js"
+  }
+}
