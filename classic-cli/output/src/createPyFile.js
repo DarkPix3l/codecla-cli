@@ -35,11 +35,11 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPyFile = createPyFile;
 const fs = __importStar(require("fs"));
-function createPyFile(fileName) {
+function createPyFile(functionName, argument) {
     const pyCode = `
-def functionName(a):
+def ${functionName}(${argument}):
     # Your code here
     return
 `;
-    fs.writeFileSync(`./${fileName}.py`, pyCode, 'utf-8');
+    fs.writeFileSync(`./output/${functionName}.py`, pyCode, 'utf-8');
 }

@@ -10,5 +10,5 @@ return;
 }
 `;
 
-fs.writeFileSync(`./${functionName}.js`, jsCode, 'utf-8');
+fs.writeFileSync(`./output/${functionName}.js`, jsCode, 'utf-8');
 }

@@ -4,10 +4,12 @@
   "main": "index_classic.js",
   "dependencies": {
     "@inquirer/prompts": "^7.4.1",
+    "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/chalk": "^0.4.31",
     "@types/node": "^22.14.1",
     "ts-node": "^10.9.2"
   },
@@ -17,6 +19,6 @@
     "dev": "ts-node index_classic.ts"
   },
   "bin": {
-  "cligen": "./output/index_classic.js"
+    "cligen": "./output/index_classic.js"
   }
 }

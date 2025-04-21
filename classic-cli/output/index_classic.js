@@ -3,11 +3,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const createJsFile_1 = require("./src/createJsFile");
+const createPyFile_1 = require("./src/createPyFile");
 const program = new commander_1.Command();
+const asciiLogo = `
+ ██████╗██╗     ██╗ ██████╗ ███████╗███╗   ██╗
+██╔════╝██║     ██║██╔════╝ ██╔════╝████╗  ██║
+██║     ██║     ██║██║  ███╗█████╗  ██╔██╗ ██║
+██║     ██║     ██║██║   ██║██╔══╝  ██║╚██╗██║
+╚██████╗███████╗██║╚██████╔╝███████╗██║ ╚████║
+ ╚═════╝╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+`;
 program
     .name("cligen")
     .version("0.0.1")
-    .description("Cligen: boilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: cligen generate -n functionName -l js -i arg1,arg2");
+    .description(`${asciiLogo}\nBoilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: cligen generate -n functionName -l js -i arg1,arg2`);
 program
     .command("generate")
     .description("Generating a new function boilerplate")
@@ -24,8 +33,12 @@ program
         (0, createJsFile_1.createJsFile)(option.name, inputArgs);
         console.log(`Project created: ${option.name} (Javascript)`);
     }
+    else if (option.language === "py") {
+        (0, createPyFile_1.createPyFile)(option.name, inputArgs);
+        console.log(`Project created: ${option.name} (Python)`);
+    }
     else {
-        console.log("invalid input or argument");
+        console.log("Invalid input or argument");
     }
 });
 program.parse(process.argv);

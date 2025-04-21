@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 //import { writeFileSync } from 'fs';
 
-export function createPyFile(fileName:string){
+export function createPyFile(functionName:string, argument:string){
 
 const pyCode:string = `
-def functionName(a):
+def ${functionName}(${argument}):
     # Your code here
     return
 `;
 
-fs.writeFileSync(`./${fileName}.py`, pyCode, 'utf-8');
+fs.writeFileSync(`./output/${functionName}.py`, pyCode, 'utf-8');
 }
