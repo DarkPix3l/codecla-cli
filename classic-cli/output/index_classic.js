@@ -6,17 +6,21 @@ const createJsFile_1 = require("./src/createJsFile");
 const createPyFile_1 = require("./src/createPyFile");
 const program = new commander_1.Command();
 const asciiLogo = `
- ██████╗██╗     ██╗ ██████╗ ███████╗███╗   ██╗
-██╔════╝██║     ██║██╔════╝ ██╔════╝████╗  ██║
-██║     ██║     ██║██║  ███╗█████╗  ██╔██╗ ██║
-██║     ██║     ██║██║   ██║██╔══╝  ██║╚██╗██║
-╚██████╗███████╗██║╚██████╔╝███████╗██║ ╚████║
- ╚═════╝╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  ██████╗ ██████╗ ██████╗ ███████╗ ██████╗██╗      █████╗      ██████╗██╗     ██╗ ║
+║ ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██║     ██╔══██╗    ██╔════╝██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║█████╗  ██║     ██║     ███████║    ██║     ██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║██╔══╝  ██║     ██║     ██╔══██║    ██║     ██║     ██║ ║
+║ ╚██████╗╚██████╔╝██████╔╝███████╗╚██████╗███████╗██║  ██║    ╚██████╗███████╗██║ ║
+║  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝ ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
 `;
 program
-    .name("cligen")
+    .name("genboil")
     .version("0.0.1")
-    .description(`${asciiLogo}\nBoilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: cligen generate -n functionName -l js -i arg1,arg2`);
+    .description(`${asciiLogo}\nBoilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: genboil generate -n functionName -l js -i arg1,arg2\n\n
+──✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧──
+`);
 program
     .command("generate")
     .description("Generating a new function boilerplate")

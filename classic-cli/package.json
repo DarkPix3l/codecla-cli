@@ -19,6 +19,6 @@
     "dev": "ts-node index_classic.ts"
   },
   "bin": {
-    "cligen": "./output/index_classic.js"
+    "genboil": "./output/index_classic.js"
   }
 }

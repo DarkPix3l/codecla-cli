@@ -6,26 +6,30 @@ import { createPyFile } from "./src/createPyFile";
 const program = new Command();
 
 const asciiLogo = `
- ██████╗██╗     ██╗ ██████╗ ███████╗███╗   ██╗
-██╔════╝██║     ██║██╔════╝ ██╔════╝████╗  ██║
-██║     ██║     ██║██║  ███╗█████╗  ██╔██╗ ██║
-██║     ██║     ██║██║   ██║██╔══╝  ██║╚██╗██║
-╚██████╗███████╗██║╚██████╔╝███████╗██║ ╚████║
- ╚═════╝╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  ██████╗ ██████╗ ██████╗ ███████╗ ██████╗██╗      █████╗      ██████╗██╗     ██╗ ║
+║ ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██║     ██╔══██╗    ██╔════╝██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║█████╗  ██║     ██║     ███████║    ██║     ██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║██╔══╝  ██║     ██║     ██╔══██║    ██║     ██║     ██║ ║
+║ ╚██████╗╚██████╔╝██████╔╝███████╗╚██████╗███████╗██║  ██║    ╚██████╗███████╗██║ ║
+║  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝ ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
 `;
 
   program
-  .name("cligen")  //need to change name later
+  .name("genboil")
   .version("0.0.1")
   .description(
-    `${asciiLogo}\nBoilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: cligen generate -n functionName -l js -i arg1,arg2`
+    `${asciiLogo}\nBoilerplate code generator for coding challenges. Use --help to see options.\n\nUsage Example: genboil generate -n functionName -l js -i arg1,arg2\n\n
+──✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧──
+`
   );
   // Define the 'generate' command
   program
     .command("generate")
     .description("Generating a new function boilerplate")
     .option("-n, --name <functionName>", "Function name")
-    .option("-i, --inputs <items>", "Comma-separated list of inputs", (val) => val.split(","), [])
+    .option("-i, --inputs <items>", "Comma-separated list of inputs", (val) => val.split(","), []) //required but can be empty
     .option("-l, --language <language>", "Programming Language (js or py)")
     .action((option) => {
       const inputArgs = option.inputs.length > 0 ? option.inputs.join(", ") : ""; // If no inputs, set to an empty string
