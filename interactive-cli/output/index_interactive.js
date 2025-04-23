@@ -1,45 +1,94 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = require("commander");
-const prompts_1 = require("@inquirer/prompts");
-const prompts_2 = require("@inquirer/prompts");
-const createJsFile_1 = require("./src/createJsFile");
-const createPyFile_1 = require("./src/createPyFile");
-const program = new commander_1.Command();
-program.name("codecla-cli").description("An interactive CLI tool for code clarity").version("0.0.2");
+import { Command } from "commander";
+import { checkbox, Separator, input } from "@inquirer/prompts";
+import chalk from "chalk";
+import { ChalkAnimation } from '@figliolia/chalk-animation';
+import { createJsFile } from "./src/createJsFile.js";
+import { createPyFile } from "./src/createPyFile.js";
+import { centerToLine } from './src/centerToLine.js';
+const program = new Command();
+const divider = "──✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧────✧──";
+const asciiLogo = `
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  ██████╗ ██████╗ ██████╗ ███████╗ ██████╗██╗      █████╗      ██████╗██╗     ██╗ ║
+║ ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██║     ██╔══██╗    ██╔════╝██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║█████╗  ██║     ██║     ███████║    ██║     ██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║██╔══╝  ██║     ██║     ██╔══██║    ██║     ██║     ██║ ║
+║ ╚██████╗╚██████╔╝██████╔╝███████╗╚██████╗███████╗██║  ██║    ╚██████╗███████╗██║ ║
+║  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝ ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+`;
+program
+    .name("genboil")
+    .version("0.0.2")
+    .description(`${asciiLogo}\n Interactive boilerplate code generator for coding challenges. Use --help to see options.\n\n${divider}`);
 program
     .command("init")
     .description("Initialize a new project")
-    .action(() => __awaiter(void 0, void 0, void 0, function* () {
-    const projectFormat = yield (0, prompts_2.checkbox)({
-        message: "In Which language should be the boilerplate?",
+    .action(async () => {
+    const animation = ChalkAnimation.rainbow(`
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  ██████╗ ██████╗ ██████╗ ███████╗ ██████╗██╗      █████╗      ██████╗██╗     ██╗ ║
+║ ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██║     ██╔══██╗    ██╔════╝██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║█████╗  ██║     ██║     ███████║    ██║     ██║     ██║ ║
+║ ██║     ██║   ██║██║  ██║██╔══╝  ██║     ██║     ██╔══██║    ██║     ██║     ██║ ║
+║ ╚██████╗╚██████╔╝██████╔╝███████╗╚██████╗███████╗██║  ██║    ╚██████╗███████╗██║ ║
+║  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝ ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+`);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    animation.stop();
+    const projectFormat = await checkbox({
+        message: `${'\u200B🌐 '}${chalk.hex("#FF6A00").bold("In Which language should be the boilerplate?")}\n\n`,
         choices: [
             { name: "javascript", value: ".js" },
             { name: "python", value: ".py" },
+            new Separator('\u200B'),
         ],
     });
-    const projectName = yield (0, prompts_1.input)({
-        message: "What’s your project name?",
+    console.log("");
+    const projectName = await input({
+        message: `${'\u200B💬 '}${chalk.hex("#FF6A00").bold("What’s your project name")}`,
     });
+    console.log("");
+    const rawArgs = await input({
+        message: `${'\u200B📦 '}${chalk.hex("#FF6A00").bold("What are the function arguments?")}`,
+    });
+    const inputArgs = rawArgs.split(",").map((arg) => arg.trim()).filter(Boolean).join(',');
     if (projectFormat.includes(".js")) {
-        (0, createJsFile_1.createJsFile)(projectName);
-        console.log(`Project created: ${projectName} (Javascript)`);
+        createJsFile(projectName, inputArgs);
+        console.log("");
+        console.log(chalk.cyan(divider));
+        console.log("");
+        const createdJ = centerToLine(`🥷✨ Project created: ${projectName + projectFormat}`, divider);
+        ChalkAnimation.pulse(createdJ);
+        console.log("");
+        console.log(chalk.cyan(divider));
+        console.log("");
     }
     else if (projectFormat.includes(".py")) {
-        (0, createPyFile_1.createPyFile)(projectName);
-        console.log(`Project created: ${projectName} (Python)`);
+        createPyFile(projectName, inputArgs);
+        console.log("");
+        console.log(chalk.cyan(divider));
+        console.log("");
+        const createdP = centerToLine(`🥷✨ Project created: ${projectName + projectFormat}`, divider);
+        ChalkAnimation.pulse(createdP);
+        console.log("");
+        console.log(chalk.cyan(divider));
+        console.log("");
     }
     else {
-        console.log("No format selected");
+        console.log("⚠ No format selected");
     }
-}));
+});
+process.on('uncaughtException', (error) => {
+    if (error instanceof Error && error.name === 'ExitPromptError') {
+        const message = centerToLine('👋 until next time!', divider);
+        console.log(chalk.cyan(divider));
+        ChalkAnimation.pulse(message);
+        console.log(chalk.cyan(divider));
+    }
+    else {
+        throw error;
+    }
+});
 program.parse();
