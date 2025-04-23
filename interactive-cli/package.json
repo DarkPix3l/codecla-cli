@@ -1,10 +1,13 @@
 {
-  "name": "codecla-cli - interactive",
+  "name": "codecla-cli_interactive",
   "version": "0.0.2",
   "main": "index_interactive.js",
-
+  "type": "module",
   "dependencies": {
+    "@figliolia/chalk-animation": "^1.0.4",
     "@inquirer/prompts": "^7.4.1",
+    "@types/chalk": "^0.4.31",
+    "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "typescript": "^5.8.3"
   },
