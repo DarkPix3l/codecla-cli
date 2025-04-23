@@ -1,14 +1,13 @@
 import * as fs from 'fs';
-//import { writeFileSync } from 'fs';
 
-export function createJsFile(fileName:string){
+export function createJsFile(functionName:string, argument:string){
 
 const jsCode:string = `
-function functionName(a) {
+function ${functionName}(${argument}) {
 // Your code here
 return;
 }
 `;
 
-fs.writeFileSync(`./${fileName}.js`, jsCode, 'utf-8');
+fs.writeFileSync(`./output/${functionName}.js`, jsCode, 'utf-8');
 }
