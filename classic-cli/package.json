@@ -3,20 +3,17 @@
   "version": "0.0.1",
   "main": "index_classic.js",
   "dependencies": {
-    "@inquirer/prompts": "^7.4.1",
-    "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@types/chalk": "^0.4.31",
     "@types/node": "^22.14.1",
     "ts-node": "^10.9.2"
   },
   "scripts": {
     "build": "npx tsc",
     "start": "node ./output/index_classic.js",
-    "dev": "ts-node index_classic.ts"
+    "dev": "npm run build && npm run start"
   },
   "bin": {
     "genboil": "./output/index_classic.js"
