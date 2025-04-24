@@ -2,6 +2,10 @@
 import { Command } from "commander";
 import { createJsFile } from "./src/createJsFile";
 import { createPyFile } from "./src/createPyFile";
+/* The CLI displays a stylish ASCII banner inspired by the block font from cfonts, 
+pre-rendered for faster startup and zero runtime dependencies.
+https://npm.io/package/cfonts 
+*/
 
 const program = new Command();
 
