@@ -3,3 +3,5 @@
 *.DS_Store
 notes.md
 node_modules/
+# ignore built files
+**/output/
